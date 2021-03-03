@@ -1,0 +1,48 @@
+<table id="rate-list" class="list rates">
+  <thead>
+  <tr>
+    <% if Redmine::VERSION::MAJOR == 3 and Redmine::VERSION::MINOR == 3 %>
+      <% @query.inline_columns.each do |column| %>
+        <%= column_header(column) %>
+      <% end %>
+    <% else %>
+      <% @query.inline_columns.each do |column| %>
+        <%= column_header(@query, column) %>
+      <% end %>
+    <% end %>
+    <%= content_tag(:th) if editable? %>
+  </tr>
+  </thead>
+  <% previous_group = false %>
+  <tbody>
+  <% @rates.each do |rate| -%>
+    <% if @query.grouped? && (group = @query.group_by_column.value(rate)) != previous_group %>
+      <% reset_cycle %>
+      <tr class="group open">
+        <td colspan="<%= @query.inline_columns.length %>">
+          <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= group.blank? ? l(:label_none) : column_content(@query.group_by_column, rate) %>
+        </td>
+        <td align="center">
+          <%= link_to '', new_user_rate_path(rate.user),
+                      remote: true, class: 'icon icon-add' if @user.nil? and @query.group_by == 'user' %>
+        </td>
+      </tr>
+      <% previous_group = group %>
+    <% end %>
+    <tr id="rate-<%= rate.id %>" class="<%= cycle('odd', 'even') %> rate">
+      <%= raw @query.inline_columns.map { |column| "<td class=\"#{column.css_classes}\">#{column_content(column, rate)}</td>" }.join %>
+      <% if editable? %>
+        <td align="center">
+          <% if rate.unlocked? %>
+            <%= link_to image_tag('edit.png'), edit_rate_path(rate, :back_url => @back_url) %>
+            <%= link_to image_tag('delete.png'), rate_path(rate, :back_url => @back_url), :method => :delete, :confirm => l(:text_are_you_sure) %>
+          <% else %>
+            <%= image_tag('locked.png') %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

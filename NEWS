@@ -1,0 +1,21 @@
+1.0.1 (2021-03-03)
+- [Feature] Compatible with Redmine 3.3
+
+1.0.0 (2021-02-05)
+- [Feature] Compatible with Redmine 3.4 and 4.1
+
+0.9.2 (2018-09-16)
+ - [Bugfix] Patching fix
+
+0.9.1 (2018-09-06)
+ - [Feature] Added Polish translations
+ - [Feature] Update to redmine 3.4
+
+0.9.0 (2016-12-30)
+
+ - [Feature] Access to see users' rates in their profile ("Rates" link).
+ - [Feature] Dedicated global view for rates management.
+
+0.8.0 (2016-10-19)
+
+Initial public release.

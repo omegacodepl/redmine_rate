@@ -1,0 +1,12 @@
+pl:
+  label_rate: Ocena
+  label_rates: Oceny
+  label_default_rate: Domyślna ocena
+  label_rate_new: Nowa ocena
+  label_rate_cost: Koszt
+  field_amount: Kwota
+  rate_label_currency: $
+  label_user_rates: "%Oceny {value}"
+  notice_rate_locked: Ocena jest zablokowana i nie może zostać usunięta.
+  label_rate_supervisor_group: Grupa nadzorującego
+  text_rate_supervisor_group_info: Użytkownicy tej grupy będą mieli uprawnienia administratora w Ocenach.
